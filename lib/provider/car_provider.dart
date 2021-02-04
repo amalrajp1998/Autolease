@@ -37,7 +37,7 @@ class CarProvider with ChangeNotifier {
 
   Future<String> fetchProduct() async {
     // print(token);
-    const url = 'https://autolease.em2.in/autolease/products';
+    const url = 'https://admin.autolease-uae.com/products';
     // const url = 'http://192.168.56.1:8080/products';
 
     try {

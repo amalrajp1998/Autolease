@@ -13,7 +13,7 @@ String token = Token;
 class Bookings with ChangeNotifier {
   List<Booking> items = [];
   Future<String> fetchBooking() async {
-    String url = 'https://autolease.em2.in/autolease/booking/${number}';
+    String url = 'https://admin.autolease-uae.com/booking/${number}';
     // const url = 'http://192.168.56.1:8080/products';
     if (number != null) {
       try {

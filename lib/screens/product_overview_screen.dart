@@ -126,7 +126,7 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
   //get poients//
   Future<http.Response> getPoients() async {
     final http.Response resp = await http.get(
-        'https://autolease.em2.in/autolease/userPoints/{customerId}?customerId=$userId',
+        'https://admin.autolease-uae.com/userPoints/{customerId}?customerId=$userId',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ' + Token

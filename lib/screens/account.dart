@@ -176,7 +176,8 @@ class _MyAccountState extends State<MyAccount> {
   //Get OTP Function //
   Future<http.Response> getotp(var username) async {
     // print(username + '= mobile');
-    var uri = new Uri.http("autolease.em2.in", "/autolease/generateOtp",
+    // https://admin.autolease-uae.com/
+    var uri = new Uri.http("admin.autolease-uae.com", "/generateOtp",
         {'mobile': username, 'signatureKey': signature});
     final response = await http.get(uri);
     print(response.body);
@@ -235,7 +236,7 @@ class _MyAccountState extends State<MyAccount> {
     print(pin + '= pin');
     // print(referalCode ?? 'getting null' + '=Ref Code');
     final http.Response response2 =
-        await http.post('https://qaautolease.em2.in/autolease/authenticate',
+        await http.post('https://admin.autolease-uae.com/authenticate',
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
@@ -282,7 +283,7 @@ class _MyAccountState extends State<MyAccount> {
 
   Future<http.Response> updateProof() async {
     final http.Response uploadimage = await http.post(
-      'https://qaautolease.em2.in/autolease/user/imageDetails',
+      'https://admin.autolease-uae.com/user/imageDetails',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $Token'
@@ -318,36 +319,36 @@ class _MyAccountState extends State<MyAccount> {
   Future<http.Response> updateUser() async {
     if (proofImageUrl != null) {
       updateProof();
-      final http.Response statuscode = await http.put(
-          'https://qaautolease.em2.in/autolease/user/update/$userId',
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer ' + Token
-          },
-          body: jsonEncode(<String, dynamic>{
-            'firstName': firstName.text,
-            'countryId': '971',
-            'lastName': secondName.text,
-            'userEmail': email.text,
-            'token': '',
-            'loginStatus': '3',
-            'mobile': Number,
-            'username': firstName.text + '1234!@#@@#',
-            'password': '!@#%^&*asdfghjkl${firstName.text}',
-            'userType': '2',
-            'status': '1',
-            'createdBy': userId.toString(),
-            'createdAT': '',
-            'updatedBy': userId.toString(),
-            'updatedAt': '',
-            "address": "string",
-            "code": "string",
-            'referralCode': referalCode.toString(),
-            'roles': [
-              {"id": 0, "name": ''}
-            ],
-            'isFav': true,
-          }));
+      final http.Response statuscode =
+          await http.put('https://admin.autolease-uae.com/user/update/$userId',
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer ' + Token
+              },
+              body: jsonEncode(<String, dynamic>{
+                'firstName': firstName.text,
+                'countryId': '971',
+                'lastName': secondName.text,
+                'userEmail': email.text,
+                'token': '',
+                'loginStatus': '3',
+                'mobile': Number,
+                'username': firstName.text + '1234!@#@@#',
+                'password': '!@#%^&*asdfghjkl${firstName.text}',
+                'userType': '2',
+                'status': '1',
+                'createdBy': userId.toString(),
+                'createdAT': '',
+                'updatedBy': userId.toString(),
+                'updatedAt': '',
+                "address": "string",
+                "code": "string",
+                'referralCode': referalCode.toString(),
+                'roles': [
+                  {"id": 0, "name": ''}
+                ],
+                'isFav': true,
+              }));
 // {
 //   "address": "string",
 //   "code": "string",
@@ -400,36 +401,36 @@ class _MyAccountState extends State<MyAccount> {
       }
       return statuscode;
     } else {
-      final http.Response statuscode = await http.put(
-          'https://qaautolease.em2.in/autolease/user/update/$userId',
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer ' + Token
-          },
-          body: jsonEncode(<String, dynamic>{
-            'firstName': firstName.text,
-            'countryId': '971',
-            'lastName': secondName.text,
-            'userEmail': email.text,
-            'token': '',
-            'loginStatus': '3',
-            'mobile': Number,
-            'username': firstName.text + '1234!@#@@#',
-            'password': '!@#%^&*asdfghjkl${firstName.text}',
-            'userType': '2',
-            'status': '1',
-            'createdBy': userId.toString(),
-            'createdAT': '',
-            'updatedBy': userId.toString(),
-            'updatedAt': '',
-            "address": "string",
-            "code": "string",
-            'referralCode': referalCode.toString(),
-            'roles': [
-              {"id": 0, "name": ''}
-            ],
-            'isFav': true,
-          }));
+      final http.Response statuscode =
+          await http.put('https://admin.autolease-uae.com/user/update/$userId',
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer ' + Token
+              },
+              body: jsonEncode(<String, dynamic>{
+                'firstName': firstName.text,
+                'countryId': '971',
+                'lastName': secondName.text,
+                'userEmail': email.text,
+                'token': '',
+                'loginStatus': '3',
+                'mobile': Number,
+                'username': firstName.text + '1234!@#@@#',
+                'password': '!@#%^&*asdfghjkl${firstName.text}',
+                'userType': '2',
+                'status': '1',
+                'createdBy': userId.toString(),
+                'createdAT': '',
+                'updatedBy': userId.toString(),
+                'updatedAt': '',
+                "address": "string",
+                "code": "string",
+                'referralCode': referalCode.toString(),
+                'roles': [
+                  {"id": 0, "name": ''}
+                ],
+                'isFav': true,
+              }));
       var decoded = json.decode(statuscode.body);
       print(decoded);
       if (statuscode.statusCode == 200) {
@@ -459,7 +460,7 @@ class _MyAccountState extends State<MyAccount> {
   Future<http.Response> getUser() async {
     print('--------Get user--------');
     final http.Response response2 = await http.get(
-      'https://qaautolease.em2.in/autolease/users/user?mobile=$Number',
+      'https://admin.autolease-uae.com/users/user?mobile=$Number',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer ' + Token
@@ -942,7 +943,7 @@ Future _upload() async {
 
 ///////
   ///Future getUploadimg(_image) async {
-  String url = 'https://qaautolease.em2.in/autolease/user/uploadProof';
+  String url = 'https://admin.autolease-uae.com/user/uploadProof';
   // final length = await _image.length();
   final request = new http.MultipartRequest('POST', Uri.parse(url));
   // ..files.add(new http.MultipartFile('file', _image.openRead(), length));

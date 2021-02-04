@@ -194,7 +194,9 @@ class MapSampleState extends State<MapSample> {
   ////////////OTP Verification////////
   Future<http.Response> checkOtp(String pin) async {
     final http.Response response2 =
-        await http.post('https://qaautolease.em2.in/autolease/authenticate',
+        // await http.post('https://qaautolease.em2.in/autolease/authenticate',
+        await http.post('https://admin.autolease-uae.com/authenticate',
+
             // await http.post('http://192.168.56.1:8080/authenticate',
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
@@ -242,7 +244,8 @@ class MapSampleState extends State<MapSample> {
   /////   get otp//
   String otpString;
   Future<http.Response> getotp(var username) async {
-    var uri = new Uri.http("qaautolease.em2.in", "/autolease/generateOtp",
+    // https://admin.autolease-uae.com/
+    var uri = new Uri.http("admin.autolease-uae.com", "/generateOtp",
         {'mobile': username, 'signatureKey': signature});
     final response = await http.get(uri);
     print(response.body);
@@ -703,7 +706,7 @@ class MapSampleState extends State<MapSample> {
     // }
     Future<http.Response> addPoient() async {
       final http.Response response = await http.post(
-        'https://qaautolease.em2.in/autolease/booking/refferalReward',
+        'https://admin.autolease-uae.com/booking/refferalReward',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token'
@@ -758,7 +761,7 @@ class MapSampleState extends State<MapSample> {
           pickuptime.minute.toString() +
           ':00');
       final http.Response response = await http.post(
-        'https://qaautolease.em2.in/autolease/booking/new',
+        'https://admin.autolease-uae.com/booking/new',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token'
