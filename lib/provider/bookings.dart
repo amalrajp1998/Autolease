@@ -13,8 +13,8 @@ String token = Token;
 class Bookings with ChangeNotifier {
   List<Booking> items = [];
   Future<String> fetchBooking() async {
-    String url = 'https://admin.autolease-uae.com/booking/${number}';
-    // const url = 'http://192.168.56.1:8080/products';
+    // String url = 'https://backend.autolease-uae.com/booking/${number}';
+    String url = 'https://qaautolease.em2.in/autolease/booking/${number}';
     if (number != null) {
       try {
         // print(url);
@@ -24,7 +24,7 @@ class Bookings with ChangeNotifier {
         });
 
         final String extractedData = response.body;
-        final content = jsonDecode(extractedData);
+        final content = jsonDecode(extractedData)['content'];
         print(content);
         print(content.length);
 
@@ -32,8 +32,9 @@ class Bookings with ChangeNotifier {
         List<Booking> loadedProducts = [];
         if (content.length != 0) {
           print('get into ');
+          print(content);
           content.forEach((element) {
-            // print(element);
+            print(element);
             loadedProducts.add(Booking(
                 carName: element['name'],
                 total: element['total'],

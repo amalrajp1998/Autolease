@@ -194,8 +194,8 @@ class MapSampleState extends State<MapSample> {
   ////////////OTP Verification////////
   Future<http.Response> checkOtp(String pin) async {
     final http.Response response2 =
-        // await http.post('https://qaautolease.em2.in/autolease/authenticate',
-        await http.post('https://admin.autolease-uae.com/authenticate',
+        await http.post('https://qaautolease.em2.in/autolease/authenticate',
+            // await http.post('https://backend.autolease-uae.com/authenticate',
 
             // await http.post('http://192.168.56.1:8080/authenticate',
             headers: <String, String>{
@@ -245,7 +245,9 @@ class MapSampleState extends State<MapSample> {
   String otpString;
   Future<http.Response> getotp(var username) async {
     // https://admin.autolease-uae.com/
-    var uri = new Uri.http("admin.autolease-uae.com", "/generateOtp",
+    // https://qaautolease.em2.in/autolease/
+    // var uri = new Uri.https("backend.autolease-uae.com", "/generateOtp",
+    var uri = new Uri.https("qaautolease.em2.in", "/autolease/generateOtp",
         {'mobile': username, 'signatureKey': signature});
     final response = await http.get(uri);
     print(response.body);
@@ -706,7 +708,8 @@ class MapSampleState extends State<MapSample> {
     // }
     Future<http.Response> addPoient() async {
       final http.Response response = await http.post(
-        'https://admin.autolease-uae.com/booking/refferalReward',
+        // 'https://backend.autolease-uae.com/booking/refferalReward',
+        'https://qaautolease.em2.in/autolease/booking/refferalReward',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token'
@@ -761,7 +764,8 @@ class MapSampleState extends State<MapSample> {
           pickuptime.minute.toString() +
           ':00');
       final http.Response response = await http.post(
-        'https://admin.autolease-uae.com/booking/new',
+        // 'https://backend.autolease-uae.com/booking/new',
+        'https://qaautolease.em2.in/autolease/booking/new',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token'
@@ -798,6 +802,7 @@ class MapSampleState extends State<MapSample> {
         }),
       );
       if (response.statusCode == 200) {
+        print(response.body);
         addPoient();
         _sucess();
       } else {

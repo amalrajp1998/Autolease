@@ -98,7 +98,8 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
   Future<http.Response> getUser() async {
     print('--------Get user--------');
     final http.Response response2 = await http.get(
-      'https://autolease.em2.in/autolease/users/user?mobile=$Number',
+      // 'https://backend.autolease-uae.com/users/user?mobile=$Number',
+      'https://qaautolease.em2.in/autolease/users/user?mobile=$Number',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer ' + Token
@@ -126,7 +127,9 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
   //get poients//
   Future<http.Response> getPoients() async {
     final http.Response resp = await http.get(
-        'https://admin.autolease-uae.com/userPoints/{customerId}?customerId=$userId',
+
+        // 'https://backend.autolease-uae.com/userPoints/{customerId}?customerId=$userId',
+        'https://qaautolease.em2.in/autolease/userPoints/{customerId}?customerId=$userId',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ' + Token
