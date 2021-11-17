@@ -337,8 +337,8 @@ class Product with ChangeNotifier {
 
     temppai = (temppaiFinal.toDouble() * 1 * paistatus).toInt();
     temppdw = (tempcdwFinal.toDouble() * 1 * cdwstatus).toInt();
-    current = (costHour * n <= 4 ? 4 : n).toInt();
-    totel = ((costHour * n <= 4 ? 4 : n) +
+    current = (costHour * (n <= 4 ? 4 : n)).toInt();
+    totel = ((costHour * (n <= 4 ? 4 : n)) +
             driverTotalf +
             cTotelf +
             temppai +

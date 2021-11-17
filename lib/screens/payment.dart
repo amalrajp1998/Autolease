@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import '../localization/constants.dart';
 import '../provider/product.dart';
 import '../screens/fleet_design.dart';
@@ -18,6 +20,7 @@ import 'car_detail.dart';
 import '../main.dart';
 
 // import 'package:location/location.dart';
+String bookingId;
 bool startDateVisible = false;
 bool endtDateVisible = false;
 bool notification = true;
@@ -193,19 +196,19 @@ class MapSampleState extends State<MapSample> {
 
   ////////////OTP Verification////////
   Future<http.Response> checkOtp(String pin) async {
-    final http.Response response2 =
-        await http.post('https://qaautolease.em2.in/autolease/authenticate',
-            // await http.post('https://backend.autolease-uae.com/authenticate',
+    final http.Response response2 = await http.post(
+        'https://admin.autolease-uae.com/autolease/authenticate',
+        // await http.post('https://backend.autolease-uae.com/authenticate',
 
-            // await http.post('http://192.168.56.1:8080/authenticate',
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(<String, String>{
-              'mobile': phone,
-              'otp': pin,
-              // 'referralCode': refrealCodeRefered ?? ''
-            }));
+        // await http.post('http://192.168.56.1:8080/authenticate',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'mobile': phone,
+          'otp': pin,
+          // 'referralCode': refrealCodeRefered ?? ''
+        }));
     var decodemsg = json.decode(response2.body);
     print(decodemsg);
     // print(decodemsg['jwt']);
@@ -247,7 +250,8 @@ class MapSampleState extends State<MapSample> {
     // https://admin.autolease-uae.com/
     // https://qaautolease.em2.in/autolease/
     // var uri = new Uri.https("backend.autolease-uae.com", "/generateOtp",
-    var uri = new Uri.https("qaautolease.em2.in", "/autolease/generateOtp",
+
+    var uri = new Uri.https("admin.autolease-uae.com", "/autolease/generateOtp",
         {'mobile': username, 'signatureKey': signature});
     final response = await http.get(uri);
     print(response.body);
@@ -642,7 +646,7 @@ class MapSampleState extends State<MapSample> {
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'xxxxxxxxxx098',
+                    'xxxxxxxxxx$bookingId',
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -709,7 +713,7 @@ class MapSampleState extends State<MapSample> {
     Future<http.Response> addPoient() async {
       final http.Response response = await http.post(
         // 'https://backend.autolease-uae.com/booking/refferalReward',
-        'https://qaautolease.em2.in/autolease/booking/refferalReward',
+        'https://admin.autolease-uae.com/autolease/booking/refferalReward',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token'
@@ -729,25 +733,26 @@ class MapSampleState extends State<MapSample> {
     }
 
     Future<http.Response> bookNow(
-      String custId,
-      String fleetId,
-      int carid,
-      String type,
-      String startDate,
-      String endDate,
-      double bai,
-      double cdw,
-      double pai,
-      int childSeat,
-      int driver,
-      int total,
-      String email,
-      String name,
-      bool prmoEmail,
-      bool emailNotification,
-      String location,
-      String address,
-    ) async {
+        String custId,
+        String fleetId,
+        int carid,
+        String type,
+        String startDate,
+        String endDate,
+        double bai,
+        double cdw,
+        double pai,
+        int childSeat,
+        int driver,
+        int total,
+        String email,
+        String name,
+        bool prmoEmail,
+        bool emailNotification,
+        String location,
+        String address,
+        double hireFee) async {
+      print(emailb.text + nameb.text);
       print(custId.toString() + "idida");
       print(token);
       print(custId);
@@ -765,7 +770,7 @@ class MapSampleState extends State<MapSample> {
           ':00');
       final http.Response response = await http.post(
         // 'https://backend.autolease-uae.com/booking/new',
-        'https://qaautolease.em2.in/autolease/booking/new',
+        'https://admin.autolease-uae.com/autolease/booking/new?mail=${emailb.text}&name=${nameb.text}',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token'
@@ -796,12 +801,15 @@ class MapSampleState extends State<MapSample> {
           'latitude': location ?? 'string',
           'longitude': carName ?? 'string',
           'status': "2",
-          'hireFee': cost ?? 'cost',
+          'hireFee': hireFee ?? 'cost',
           'updatedBy': custId,
           'createdBy': custId
         }),
       );
       if (response.statusCode == 200) {
+        // bookingId =
+        var res = jsonDecode(response.body);
+        bookingId = res['id'].toString();
         print(response.body);
         addPoient();
         _sucess();
@@ -881,14 +889,14 @@ class MapSampleState extends State<MapSample> {
                         children: <Widget>[
                           Text('Start Date'),
                           Text(startDateVisible
-                              ? pickupday +
+                              ? pickupday.toString() +
                                   "-" +
-                                  pickupmonth +
+                                  pickupmonth.toString() +
                                   "-" +
                                   pickupdate.year.toString()
                               : ''),
                           Text(startDateVisible
-                              ? pickuptime.format(context)
+                              ? pickuptime.format(context).toString()
                               : ''),
                           IconButton(
                               alignment: Alignment.topCenter,
@@ -910,8 +918,9 @@ class MapSampleState extends State<MapSample> {
                                           initialTime: TimeOfDay.now())
                                       .then((time) => {
                                             print(date),
-                                            pickupdate = date,
-                                            pickuptime = time,
+                                            pickupdate = date ?? DateTime.now(),
+                                            pickuptime =
+                                                time ?? TimeOfDay.now(),
                                             startTimehr = pickuptime.hour
                                                     .toDouble() +
                                                 (pickuptime.minute.toDouble() /
@@ -971,13 +980,15 @@ class MapSampleState extends State<MapSample> {
                         children: <Widget>[
                           Text('End Date'),
                           Text(endtDateVisible
-                              ? endDay +
+                              ? endDay.toString() +
                                   "-" +
-                                  endMonth +
+                                  endMonth.toString() +
                                   '-' +
                                   enddate.year.toString()
                               : ''),
-                          Text(endtDateVisible ? endtime.format(context) : ''),
+                          Text(endtDateVisible
+                              ? endtime.format(context).toString()
+                              : ''),
                           IconButton(
                               alignment: Alignment.topCenter,
                               icon: Icon(
@@ -989,16 +1000,16 @@ class MapSampleState extends State<MapSample> {
                                   endtDateVisible = true;
                                   showDatePicker(
                                     context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime.now(),
+                                    initialDate: pickupdate ?? DateTime.now(),
+                                    firstDate: pickupdate ?? DateTime.now(),
                                     lastDate: DateTime(2090),
                                   ).then((date) => showTimePicker(
                                           context: context,
                                           initialTime: TimeOfDay.now())
                                       .then((time) => {
                                             print(date),
-                                            enddate = date,
-                                            endtime = time,
+                                            enddate = date ?? DateTime.now(),
+                                            endtime = time ?? TimeOfDay.now(),
                                             endTimehr =
                                                 endtime.hour.toDouble() +
                                                     (endtime.minute.toDouble() /
@@ -1385,6 +1396,22 @@ class MapSampleState extends State<MapSample> {
                                 ],
                               ),
                               SizedBox(
+                                height: 2,
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  Expanded(flex: 6, child: Text('VAT  5%')),
+                                  Expanded(flex: 2, child: Text('AED')),
+                                  Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                          ((car.totel) * (5 / 100)).toString()))
+                                ],
+                              ),
+                              SizedBox(
                                 height: 5,
                               ),
                               Row(
@@ -1405,7 +1432,9 @@ class MapSampleState extends State<MapSample> {
                                   Expanded(flex: 2, child: Text('AED')),
                                   Expanded(
                                       flex: 2,
-                                      child: Text(car.totel.toString()))
+                                      child: Text(
+                                          (car.totel + (car.totel) * (5 / 100))
+                                              .toString()))
                                 ],
                               ),
                               SizedBox(
@@ -1434,6 +1463,16 @@ class MapSampleState extends State<MapSample> {
                 color: Colors.orange[900],
                 onPressed: btn
                     ? () {
+                        if (!(startDateVisible && endtDateVisible)) {
+                          Fluttertoast.showToast(
+                              msg: "Please select Date",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        }
                         if (isuserLogin == true) {
                           bool emailValid = RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -1522,7 +1561,8 @@ class MapSampleState extends State<MapSample> {
                                 notificationAutolease,
                                 notification,
                                 locationaddress,
-                                _currentAddress);
+                                _currentAddress,
+                                car.current.toDouble());
                           }
                         } else {
                           _showDialog();

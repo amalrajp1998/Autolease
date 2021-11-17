@@ -14,7 +14,7 @@ class Bookings with ChangeNotifier {
   List<Booking> items = [];
   Future<String> fetchBooking() async {
     // String url = 'https://backend.autolease-uae.com/booking/${number}';
-    String url = 'https://qaautolease.em2.in/autolease/booking/${number}';
+    String url = 'https://admin.autolease-uae.com/autolease/booking/${number}';
     if (number != null) {
       try {
         // print(url);

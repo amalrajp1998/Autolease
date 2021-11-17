@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "6494609459",
+    "firebase_url": "https://autolease-5b8ac.firebaseio.com",
+    "project_id": "autolease-5b8ac",
+    "storage_bucket": "autolease-5b8ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6494609459:android:d7be41f7fbef084e294346",
+        "android_client_info": {
+          "package_name": "com.autoleaseuae.AutoLease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6494609459-ha37kn3an2u7g634qtiqsploqohc3mpk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyTK8HQ88bIcByiEpBMSWG42HIx8oEFLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6494609459-ha37kn3an2u7g634qtiqsploqohc3mpk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

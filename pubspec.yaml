@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 3.0.0+5
+version: 3.0.2+11
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -39,14 +39,13 @@ dependencies:
   devicelocale: ^0.3.1
   shared_preferences: ^0.5.8
   auto_animated: ^2.1.0
-  sms_otp_auto_verify: ^1.2.2 
+  sms_otp_auto_verify: ^1.2.2
   flare_flutter: ^2.0.6
   image_picker: ^0.6.7+14
   fluttertoast: ^7.1.1
   firebase_dynamic_links: ^0.6.2
   share: ^0.6.5+4
-  # firebase_analytics: ^6.2.0
-
+  firebase_analytics: ^6.2.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -85,53 +84,53 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/seat.png
-     - assets/gear.png
-     - assets/door.png
-     - assets/engine.png
-     - assets/lug.png
-     - assets/ac.png
-     - assets/about.png
-     - assets/fleet.png
-     - assets/language.png
-     - assets/login.png
-     - assets/money.png
-     - assets/mybooking.png
-     - assets/privacy.png
-     - assets/share.png
-     - assets/terms.png
+    - assets/seat.png
+    - assets/gear.png
+    - assets/door.png
+    - assets/engine.png
+    - assets/lug.png
+    - assets/ac.png
+    - assets/about.png
+    - assets/fleet.png
+    - assets/language.png
+    - assets/login.png
+    - assets/money.png
+    - assets/mybooking.png
+    - assets/privacy.png
+    - assets/share.png
+    - assets/terms.png
     #  - assets/car.jpg
-     - assets/profile.png
+    - assets/profile.png
     #  - assets/car1.jpg
     #  - assets/car2.jpg
     #  - assets/car3.png
     #  - assets/car4.png
-     - assets/driver.png
-     - assets/gps.png
-     - assets/child.png
-     - assets/add.png
-     - assets/sub.png
-     - assets/broke.png
-     - assets/money1.png
-     - assets/shield.png
-     - assets/location.png
-     - assets/confirm.png
-     - assets/logo.png
+    - assets/driver.png
+    - assets/gps.png
+    - assets/child.png
+    - assets/add.png
+    - assets/sub.png
+    - assets/broke.png
+    - assets/money1.png
+    - assets/shield.png
+    - assets/location.png
+    - assets/confirm.png
+    - assets/logo.png
     #  - assets/bg.jpg
     #  - assets/bg.gif
-     - lib/lang/en.json
-     - lib/lang/ar.json
+    - lib/lang/en.json
+    - lib/lang/ar.json
     #  - assets/car6.png
-     - assets/aed.png
-     - assets/seat123.png
-     - assets/gear1.png
-     - assets/lugg.png
+    - assets/aed.png
+    - assets/seat123.png
+    - assets/gear1.png
+    - assets/lugg.png
     #  - assets/img.png
-     - assets/fail.png
-     - assets/animation.flr
-     - assets/animation1.flr
-     - assets/logo_e.png
-     - assets/background.png
+    - assets/fail.png
+    - assets/animation.flr
+    - assets/animation1.flr
+    - assets/logo_e.png
+    - assets/background.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
