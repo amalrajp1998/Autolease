@@ -334,6 +334,7 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
 }
 
 Future<void> _createDynamicLink() async {
+  print('create dynamic link');
   final DynamicLinkParameters parameters = DynamicLinkParameters(
     uriPrefix: 'https://autoleasetest.page.link',
     link: Uri.parse('https://autoleasetest.page.link/$myReferralCode'),

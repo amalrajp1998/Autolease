@@ -354,5 +354,5 @@ Future<void> _createDynamicLink() async {
   final ShortDynamicLink shortLink = await parameters.buildShortLink();
   myUrl = shortLink.shortUrl;
   myReferralUrl = myUrl.toString();
-  print(myUrl);
+  print(myReferralUrl);
 }
